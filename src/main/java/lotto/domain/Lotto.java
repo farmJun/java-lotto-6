@@ -6,6 +6,12 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
+    private static final int LOTTO_SIZE = 6;
+    private static final String PREFIX = "[";
+    private static final String SUFFIX = "]";
+    private static final String DELIMITER = ", ";
+
+
     private final List<LottoNumber> numbers;
 
     public Lotto(List<Integer> numbers) {
@@ -16,7 +22,7 @@ public class Lotto {
     }
 
     private void validate(List<Integer> numbers) {
-        if (numbers.size() != 6) {
+        if (numbers.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException();
         }
 
@@ -36,7 +42,7 @@ public class Lotto {
     }
 
     public String getNumbers() {
-        StringJoiner joiner = new StringJoiner(", ", "[", "]");
+        StringJoiner joiner = new StringJoiner(DELIMITER, PREFIX, SUFFIX);
         numbers.forEach(item -> joiner.add(item.toString()));
         return joiner.toString();
     }

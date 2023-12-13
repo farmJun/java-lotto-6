@@ -8,6 +8,10 @@ import java.util.stream.IntStream;
 
 public class LottoMachine {
 
+    private static final int ZERO = 0;
+    private static final int MINIMUM_LOTTO_NUMBER = 1;
+    private static final int MAXIMUM_LOTTO_NUMBER = 45;
+    private static final int LOTTO_SIZE = 6;
     private static final Money LOTTO_PRICE = new Money(1000);
 
     private LottoMachine() {
@@ -31,13 +35,15 @@ public class LottoMachine {
             throw new IllegalArgumentException();
         }
 
-        if (lottoPurchaseMoney.divideBy(LOTTO_PRICE) == 0) {
+        if (lottoPurchaseMoney.divideBy(LOTTO_PRICE) == ZERO) {
             throw new IllegalArgumentException();
         }
     }
 
     private static List<Integer> generateRandomNumbers() {
-        List<Integer> randomNumbers = new ArrayList<>(Randoms.pickUniqueNumbersInRange(1, 45, 6));
+        List<Integer> randomNumbers = new ArrayList<>(
+            Randoms.pickUniqueNumbersInRange(MINIMUM_LOTTO_NUMBER, MAXIMUM_LOTTO_NUMBER,
+                LOTTO_SIZE));
         randomNumbers.sort(Integer::compareTo);
         return randomNumbers;
     }

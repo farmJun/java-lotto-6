@@ -6,6 +6,9 @@ import java.util.List;
 
 public class Referee {
 
+    private static final int ZERO = 0;
+    private static final int INCREASE = 1;
+
     private Referee() {
 
     }
@@ -20,7 +23,7 @@ public class Referee {
         List<Rank> ranks = issuedLottos.calculateRankOfLottos(winningLotto, bonusNumber);
 
         for (Rank rank : ranks) {
-            statistics.put(rank, statistics.get(rank) + 1);
+            statistics.put(rank, statistics.get(rank) + INCREASE);
         }
 
         return new Statistics(statistics);
@@ -30,7 +33,7 @@ public class Referee {
         EnumMap<Rank, Integer> initialStatistics = new EnumMap<>(Rank.class);
 
         Arrays.stream(Rank.values())
-            .forEach(rank -> initialStatistics.put(rank, 0));
+            .forEach(rank -> initialStatistics.put(rank, ZERO));
 
         return initialStatistics;
     }

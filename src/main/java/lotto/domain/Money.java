@@ -5,6 +5,9 @@ import java.math.RoundingMode;
 
 public class Money {
 
+    private static final int ZERO = 0;
+    private static final int ONE_HUNDRED_PERCENT = 100;
+    private static final int SCALE = 1;
     private final int money;
 
     public Money(int money) {
@@ -19,7 +22,7 @@ public class Money {
     }
 
     public boolean isDivideUpBy(Money divisor) {
-        return money % divisor.money == 0;
+        return money % divisor.money == ZERO;
     }
 
     public int divideBy(Money divisor) {
@@ -27,9 +30,9 @@ public class Money {
     }
 
     public double calculateRateOfReturn(Money totalWinningPrize) {
-        double rateOfReturn = (totalWinningPrize.money / (double) this.money) * 100;
+        double rateOfReturn = (totalWinningPrize.money / (double) this.money) * ONE_HUNDRED_PERCENT;
         BigDecimal halfUpRateOfReturn = new BigDecimal(Double.toString(rateOfReturn));
-        return halfUpRateOfReturn.setScale(1, RoundingMode.HALF_UP).doubleValue();
+        return halfUpRateOfReturn.setScale(SCALE, RoundingMode.HALF_UP).doubleValue();
     }
 
     public int getMoney() {

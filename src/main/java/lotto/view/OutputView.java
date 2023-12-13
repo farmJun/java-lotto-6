@@ -7,8 +7,13 @@ import lotto.domain.Statistics;
 
 public class OutputView {
 
+    private static final String NUMBER_OF_LOTTO_PURCHASED_MESSAGE = "%d개를 구매했습니다.";
+    private static final String STATISTICS_FOREWORD_MESSAGE = "당첨통계";
+    private static final String TRIPLE_DASH = "---";
     private static final String MESSAGE_WITHOUT_BONUS_NUMBER = "%d개 일치 (%,d원) - %d개";
     private static final String MESSAGE_WITH_BONUS_NUMBER = "%d개 일치, 보너스 볼 일치 (%,d원) - %d개";
+    private static final String RATE_OF_RETURN_MESSAGE = "총 수익률은 %.1f%%입니다.";
+
 
     private OutputView() {
 
@@ -16,13 +21,17 @@ public class OutputView {
 
     public static void printIssuedLottos(List<String> issuedLottosInformation) {
         System.out.println();
-        System.out.println(String.format("%d개를 구매했습니다.", issuedLottosInformation.size()));
+        System.out.println(
+            String.format(NUMBER_OF_LOTTO_PURCHASED_MESSAGE, issuedLottosInformation.size()));
         for (String lottoInformation : issuedLottosInformation) {
             System.out.println(lottoInformation);
         }
     }
 
     public static void printStatistics(Statistics statistics) {
+        System.out.println(STATISTICS_FOREWORD_MESSAGE);
+        System.out.println(TRIPLE_DASH);
+
         for (Entry<Rank, Integer> rank : statistics.getStatistics()) {
             if (rank.getKey().equals(Rank.NOTHING)) {
                 continue;
@@ -56,7 +65,7 @@ public class OutputView {
     }
 
     public static void printProfit(double profit) {
-        System.out.println(String.format("총 수익률은 %.1f%%입니다.", profit));
+        System.out.println(String.format(RATE_OF_RETURN_MESSAGE, profit));
     }
 
     public static void printExceptionMessage(IllegalArgumentException illegalArgumentException) {
